@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { ProductCard } from "../ProductCard/ProductCard"
+import { SearchBar } from "../SearchBar/SearchBar"
 
 const URL = "https://fakestoreapi.com/products"
 
 export const MainContainer = () => {
   const [products, setProducts] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
 
   const handleGetProducts = async () => {
     try {
@@ -20,11 +22,17 @@ export const MainContainer = () => {
     handleGetProducts();
   }, [])
 
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   return (
     <main className="min-h-screen bg-gray-100 py-6 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
         <section className="flex flex-wrap justify-center gap-6 mt-6">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </section>
