@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { ProductCard } from "../ProductCard/ProductCard"
 
-const URL = "https://fakestoreapi.com/products";
+const URL = "https://fakestoreapi.com/products"
 
 export const MainContainer = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([])
 
   const handleGetProducts = async () => {
     try {
@@ -21,14 +21,14 @@ export const MainContainer = () => {
   }, [])
 
   return (
-    <>
-      <section className="flex flex-col gap-4 p-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
-        ))}
-      </section>
-    </>
+    <main className="min-h-screen bg-gray-100 py-6 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        <section className="flex flex-wrap justify-center gap-6 mt-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} {...product} />
+          ))}
+        </section>
+      </div>
+    </main>
   )
 }
-
-
